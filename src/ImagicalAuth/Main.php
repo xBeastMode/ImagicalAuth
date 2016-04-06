@@ -114,6 +114,20 @@
 
     }
 
+    public function isLoggedIn($username)
+    {
+
+      // MySQL Stuff here...
+
+    }
+
+    public function logOut($username)
+    {
+
+      // MySQL Stuff here...
+
+    }
+
   }
 
 ?>
