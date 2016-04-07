@@ -24,7 +24,7 @@ class Main extends PluginBase{
   public function onEnable(){
     @mkdir($this->dataPath());
     $this->cfg = new Config($this->dataPath() . "config.yml", Config::YAML, ["stay_logged_in" => true]);
-    $this->msg = new Config($this->dataPath() . "message.yml", Config::YAML, ["Join" =>, "msg" => "To play either:", "register" => "Register with /register", "login" => "Login with /login", "popup" => "You are not authenticated!"]);
+    $this->msg = new Config($this->dataPath() . "message.yml", Config::YAML, ["Join" =>, "msg" => "To play either:", "register" => "- Register with /register", "login" => "- Login with /login", "popup" => "You are not authenticated!"]);
     $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
     $this->getLogger()->info(ImagicalAuth::PREFIX . "Enabled!");
   }
