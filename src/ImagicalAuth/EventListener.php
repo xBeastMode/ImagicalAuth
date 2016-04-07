@@ -15,8 +15,11 @@ class EventListener extends PluginBase implements Listener{
 
     public function onJoin(PlayerJoinEvent $event){
       $player = $sender->getName();
-      $msg = $msg->get("on_join_msg");
+      $join = $msg->get("Join");
+      $msg = $join["msg"];
+      $register = $join["register"];
+      $login = $join["login"];
       $player->sendMessage("This server uses IA (Imagical Auth) - the universal authentication plugin for ImagicalMine");
-      $player->sendMessage($msg);
+      $player->sendMessage("$msg \n $register \n $login");
     }
 }
