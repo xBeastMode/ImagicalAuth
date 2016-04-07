@@ -14,6 +14,8 @@ class EventListener extends PluginBase implements Listener{
     }
 
     public function onJoin(PlayerJoinEvent $event){
-
+      $player = $sender->getName();
+      $msg = $msg->get("on_join_msg");
+      $player->sendMessage($msg);
     }
 }
