@@ -100,14 +100,30 @@ class Main extends PluginBase{
     return bin2hex(md5(hash("sha1", $password) ^ hash("sha256", $password)));
   }
   /**
-   * Verifies current password
+   * Verifies every single character of password
    *
-   * @param Player $p
+   * @param $hash
    * @param $password
    * @return bool
    */
-  public function verifyPasswordHash(Player $p, $password){
-    //TODO: implement password verification
+  public function verifyPasswordHash($hash, $password){
+    $password = $this->hashPassword($password);
+    $p1 = explode("", $hash);
+    $p2 = explode("", $password);
+    $matches = [];
+    foreach($p1 as $a){
+      foreach($p2 as $b){
+        if($a === $b and $b === $a){
+          $matches[] = 1;
+        }else{
+          $matches[] = 0;
+        }
+      }
+    }
+    if(in_array(0, $matches, true)){
+      return false;
+    }
+    return true;
   }
   /**
    * Un-authenticate player to attempt login/registration
