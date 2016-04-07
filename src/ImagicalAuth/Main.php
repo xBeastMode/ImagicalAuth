@@ -24,7 +24,7 @@ class Main extends PluginBase{
   public function onEnable(){
     @mkdir($this->dataPath());
     $this->cfg = new Config($this->dataPath() . "config.yml", Config::YAML, ["stay_logged_in" => true]);
-    $this->msg = new Config($this->dataPath() . "message.yml", Config::YAML, ["on_join_msg" => "This server uses IA (ImagicalAuth), to play on the server you must either register with /register or login with /login!"]);
+    $this->msg = new Config($this->dataPath() . "message.yml", Config::YAML, ["on_join_msg" => ""]);
     $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
     $this->getLogger()->info(ImagicalAuth::PREFIX . "Enabled!");
   }
