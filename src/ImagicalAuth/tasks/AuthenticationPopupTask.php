@@ -2,6 +2,7 @@
 <?php
 namespace imagicalmine\tasks;
 use ImagicalAuth\Main;
+use imagicalmine\utils\cm;
 use pocketmine\Player;
 use pocketmine\scheduler\PluginTask;
 class AuthenticationPopupTask extends PluginTask{
@@ -26,6 +27,6 @@ class AuthenticationPopupTask extends PluginTask{
      * @return void
      */
     public function onRun($currentTick){
-        $this->player->sendPopup($this->plugin->getMessage("message.join")["popup"]);
+        $this->player->sendPopup(cm::color($this->plugin->getMessage("message.join")["popup"]));
     }
 }
