@@ -125,29 +125,6 @@ class Main extends PluginBase implements Listener {
     return self::$instance;
   }
   /**
-   * Initiate MySQL Database
-   *
-   * @param $host
-   * @param $username
-   * @param $password
-   * @param $db_name
-   * @param $port
-   */
-  public function initDatabase($host, $username, $password, $db_name, $port){
-    $this->sql = new \mysqli($host, $username, $password, $db_name, $port);
-  }
-  /**
-   * Return MySQL database
-   *
-   * @return \mysqli|null
-   */
-  public function getDatabase(){
-    if ($this->sql instanceof \mysqli) {
-      return $this->sql;
-    }
-    return null;
-  }
-  /**
    * Returns hashed format of password
    *
    * @param $password
