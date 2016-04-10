@@ -35,54 +35,43 @@ class Main extends PluginBase implements Listener {
 		@mkdir($this->getDataFolder());
 		@mkdir($this->getDataFolder() . "/account");
 		$this->messages = new Config($this->getDataFolder() . "/messages.yml", Config::YAML);
-                if($this->messages->get("message.authdelaykickreason") == null)
-                {
-                        $this->messages->get("message.authdelaykickreason", "§eYou took too much time trying to log ");
+                if(!isset($this->messages->getAll()["message.authdelaykickreason"])){
+                        $this->messages->get("message.authdelaykickreason", "&eYou took too much time trying to log ");
                 }
-                if($this->messages->get("message.join") == null)
-                {
-                        $this->messages->set("message.join", "§eWelcome to ImagicalAuth Server ");
+                if(!isset($this->messages->getAll()["message.join"])){
+                        $this->messages->set("message.join", "&eWelcome to ImagicalAuth Server ");
                 }
-		if($this->messages->get("main.prefix") == null)
-		{
-			$this->messages->set("main.prefix", "§7[§aImagicalAuth§7]§f ");
+		if(!isset($this->messages->getAll()["main.prefix"])){
+			$this->messages->set("main.prefix", "&7[§aImagicalAuth§7]§f ");
 		}
-		if($this->messages->get("message.login") == null)
-		{
-			$this->messages->set("message.login", "§eYou have to login. Use /login <password>.");
+		if(!isset($this->messages->getAll()["message.login"])){
+			$this->messages->set("message.login", "&eYou have to login. Use /login <password>.");
 		}
-		if($this->messages->get("message.loginSuccessfull") == null)
-		{
-			$this->messages->set("message.loginSuccessfull", "§aYou have successfully logged in!");
+		if(!isset($this->messages->getAll()["message.loginSuccessfull"])){
+			$this->messages->set("message.loginSuccessfull", "&aYou have successfully logged in!");
 		}
-		if($this->messages->get("message.loginFail") == null)
-		{
-			$this->messages->set("message.loginFail", "§cWrong password!");
+		if(!isset($this->messages->getAll()["message.loginFail"])){
+			$this->messages->set("message.loginFail", "&cWrong password!");
 		}
-		if($this->messages->get("message.loginNotRegistered") == null)
-		{
-			$this->messages->set("message.loginNotRegistered", "§cThis account is not registered!");
+		if(!isset($this->messages->getAll()["message.loginNotRegistered"])){
+			$this->messages->set("message.loginNotRegistered", "&cThis account is not registered!");
 		}
-		if($this->messages->get("message.register") == null)
-		{
-			$this->messages->set("message.register", "§eYou have to register. Use /register <password>.");
+		if(!isset($this->messages->getAll()["message.register"])){
+			$this->messages->set("message.register", "&eYou have to register. Use /register <password>.");
 		}
-		if($this->messages->get("message.registerSuccessfull") == null)
-		{
-			$this->messages->set("message.registerSuccessfull", "§aYou have successfully registered your account!");
+		if(!isset($this->messages->getAll()["message.registerSuccessfull")){
+			$this->messages->set("message.registerSuccessfull", "&aYou have successfully registered your account!");
 		}
-		if($this->messages->get("message.registerFail") == null)
-		{
-			$this->messages->set("message.registerFail", "§cThis account is already registered!");
+		if(!isset($this->messages->getAll()["message.registerFail"])){
+			$this->messages->set("message.registerFail", "&cThis account is already registered!");
 		}
-		if($this->messages->get("message.registerBroadcast") == null)
-		{
-			$this->messages->set("message.registerBroadcast", "§ejoined for the first time!");
+		if(!isset($this->messages->getAll()["message.registerBroadcast"])){
+			$this->messages->set("message.registerBroadcast", "&ejoined for the first time!");
 		}
-		if($this->messages->get("message.authentificationFail") == null)
-		{
-			$this->messages->set("message.authentificationFail", "§cCould not authentificate account!");
+		if(!isset($this->messages->getAll()["message.authentificationFail"])){
+			$this->messages->set("message.authentificationFail", "&cCould not authentificate account!");
 		}
+		$this->messages->setAll($this->messages->getAll());
 		$this->messages->save();
 	}
     public function onDisable(){
