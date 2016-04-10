@@ -26,6 +26,6 @@ class AuthenticationPopupTask extends PluginTask{
      * @return void
      */
     public function onRun($currentTick){
-        $this->player->sendPopup($this->plugin->getMessage("Join")["popup"]);
+        $this->player->sendPopup($this->plugin->getMessage("message.join")["popup"]);
     }
 }
