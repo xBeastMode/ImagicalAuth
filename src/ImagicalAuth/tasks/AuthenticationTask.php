@@ -25,6 +25,6 @@ class AuthenticationTask extends PluginTask{
      * @return void
      */
     public function onRun($currentTick){
-        $this->player->kick($this->plugin->getMessage("authentication.delay.kick.reason"));
+        $this->player->kick($this->plugin->getMessage("message.authdelaykickreason"));
     }
 }
