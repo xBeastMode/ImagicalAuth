@@ -5,38 +5,67 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat as TF;
-class Main extends PluginBase{
-  const PREFIX = TF::RED . "[" . TF::LIGHT_PURPLE . "ImagicalMine" . TF::RED . "] ";
-  /** @var Main */
-  private static $instance = null;
-  /** @var Player[] */
-  private $unAuthed = [];
-  /** @var $sql */
-  private $sql;
-  /** @var Config */
-  private $cfg;
-  /** @var Config */
-  private $msg;
-  public function onLoad(){
-    $this->getLogger()->info(ImagicalAuth::PREFIX . "Loaded!");
-    self::$instance = $this;
-  }
-  public function onEnable(){
-    @mkdir($this->dataPath());
-    $msg_data = ["Join" => [
-      "msg" => "To play either:", 
-      "register" => "- Register with /register",
-      "login" => "- Login with /login",
-      "popup" => "You are not authenticated!"]];
-    $cfg_data = ["stay_logged_in" => true];
-    $this->cfg = new Config($this->dataPath() . "config.yml", Config::YAML, yaml_emit($cfg_data));
-    $this->msg = new Config($this->dataPath() . "message.yml", Config::YAML, yaml_emit($msg_data));
-    $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-    $this->getLogger()->info(ImagicalAuth::PREFIX . "Enabled!");
-  }
-  public function onDisable(){
-    $this->getLogger()->info(ImagicalAuth::PREFIX . "Disabled!");
-  }
+use pocketmine\event\Listener;
+class Main extends PluginBase and implements Listner {
+     public $toLogin = array();
+     public $toRegister = array();
+	
+	public function onEnable()
+	{
+        $this->getServer()->getPluginManager()->registerEvents($this ,$this);
+		@mkdir($this->getDataFolder());
+		@mkdir($this->getDataFolder() . "/account");
+		$this->messages = new Config($this->getDataFolder() . "/messages.yml", Config::YAML);
+                if($this->messages->get("message.authdelaykickreason") == null)
+                {
+                        $this->messages->get("message.authdelaykickreason", "§eYou took too much time trying to log ");
+                }
+                if($this->messages->get("message.join") == null)
+                {
+                        $this->messages->set("message.join", "§eWelcome to ImagicalAuth Server ");
+                }
+		if($this->messages->get("main.prefix") == null)
+		{
+			$this->messages->set("main.prefix", "§7[§aImagicalAuth§7]§f ");
+		}
+		if($this->messages->get("message.login") == null)
+		{
+			$this->messages->set("message.login", "§eYou have to login. Use /login <password>.");
+		}
+		if($this->messages->get("message.loginSuccessfull") == null)
+		{
+			$this->messages->set("message.loginSuccessfull", "§aYou have successfully logged in!");
+		}
+		if($this->messages->get("message.loginFail") == null)
+		{
+			$this->messages->set("message.loginFail", "§cWrong password!");
+		}
+		if($this->messages->get("message.loginNotRegistered") == null)
+		{
+			$this->messages->set("message.loginNotRegistered", "§cThis account is not registered!");
+		}
+		if($this->messages->get("message.register") == null)
+		{
+			$this->messages->set("message.register", "§eYou have to register. Use /register <password>.");
+		}
+		if($this->messages->get("message.registerSuccessfull") == null)
+		{
+			$this->messages->set("message.registerSuccessfull", "§aYou have successfully registered your account!");
+		}
+		if($this->messages->get("message.registerFail") == null)
+		{
+			$this->messages->set("message.registerFail", "§cThis account is already registered!");
+		}
+		if($this->messages->get("message.registerBroadcast") == null)
+		{
+			$this->messages->set("message.registerBroadcast", "§ejoined for the first time!");
+		}
+		if($this->messages->get("message.authentificationFail") == null)
+		{
+			$this->messages->set("message.authentificationFail", "§cCould not authentificate account!");
+		}
+		$this->messages->save();
+	}  
   /**
    * Gets message from configuration
    *

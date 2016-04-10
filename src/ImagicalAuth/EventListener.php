@@ -18,7 +18,7 @@ class EventListener extends PluginBase implements Listener{
       $player = $sender->getName();
       $join = $this->plugin->getMessage("Join");
       $player->sendMessage("This server uses IA (Imagical Auth) - the universal authentication plugin for ImagicalMine");
-      $player->sendMessage("{$join["msg"]}\n{$join["register"]}\n{$join["login"]}");
+      $player->sendMessage("{$join["main.prefix"]}\n{$join["message.register"]}\n{$join["message.login"]}");
       $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new AuthenticationPopupTask($this->plugin, $player), 20);
     }
 }
