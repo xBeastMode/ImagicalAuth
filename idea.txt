@@ -1,0 +1,7 @@
+# Ideas 
+
+All pull requests on this file will be accepted if not a subject of spam and abusing. This is a file to put your ideas!
+
+Use the format :
+@YaBoiLewis - Add [something]
+
