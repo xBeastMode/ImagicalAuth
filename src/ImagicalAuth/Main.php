@@ -16,6 +16,10 @@ class Main extends PluginBase and implements Listner {
 		@mkdir($this->getDataFolder());
 		@mkdir($this->getDataFolder() . "/account");
 		$this->messages = new Config($this->getDataFolder() . "/messages.yml", Config::YAML);
+                if($this->messages->get("message.join") == null)
+                {
+                        $this->messages->set("message.join", "§eWelcome to ImagicalAuth Server ");
+                }
 		if($this->messages->get("main.prefix") == null)
 		{
 			$this->messages->set("main.prefix", "§7[§aImagicalAuth§7]§f ");
