@@ -1,6 +1,7 @@
 <?php
 namespace imagicalmine\tasks;
 use ImagicalAuth\Main;
+use imagicalmine\utils\cm;
 use pocketmine\Player;
 use pocketmine\scheduler\PluginTask;
 class AuthenticationTask extends PluginTask{
@@ -25,6 +26,6 @@ class AuthenticationTask extends PluginTask{
      * @return void
      */
     public function onRun($currentTick){
-        $this->player->kick($this->plugin->getMessage("message.authdelaykickreason"));
+        $this->player->kick(cm::color($this->plugin->getMessage("message.authdelaykickreason")));
     }
 }
